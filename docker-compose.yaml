@@ -50,10 +50,8 @@ services:
         volumes:
             - './plex:/config'
             - './plex/transcode:/transcode'
-            - '/media/Media/Media/Movies:/data/movies'
-            - '/media/Media/Media/TVShows:/data/tvshows'
-            - '/media/Media/Media/Kid Movies:/data/kidmovies'
-            - '/media/Media/Media/Kid TV:/data/kidtvshows'
+            - '${ROOT}/Media/Movies:/data/movies'
+            - '${ROOT}/Media/TVShows:/data/tvshows'
             - '/etc/localtime:/etc/localtime:ro'
         labels:
             - 'traefik.enable=true'
@@ -100,7 +98,7 @@ services:
             - DEBUG=false
 
         volumes:
-            - '/media/Media/Torrents:/data'
+            - '${ROOT}/Torrents:/data'
             - './delugevpn/config:/config'
             - './ovpn/${VPNPROVIDER}:/config/openvpn'
             - '/etc/localtime:/etc/localtime:ro'
@@ -133,9 +131,8 @@ services:
             - PGID=${PGID}
         volumes:
             - './sonarr:/config'
-            - '/media/Media/Torrents/Completed:/data/Completed'
-            - '/media/Media/Media/TVShows:/tv'
-            - '/media/Media/Media/Kid TV:/kidtv'
+            - '${ROOT}/Torrents/Completed:/data/Completed'
+            - '${ROOT}/Media/TVShows:/tv'
             - '/etc/localtime:/etc/localtime:ro'
         labels:
             - 'traefik.enable=true'
@@ -166,9 +163,8 @@ services:
             - PGID=${PGID}
         volumes:
             - './radarr:/config'
-            - '/media/Media/Torrents/Completed:/data/Completed'
-            - '/media/Media/Media/Movies:/movies'
-            - '/media/Media/Media/Kid Movies:/kidmovies'
+            - '${ROOT}/Torrents/Completed:/data/Completed'
+            - '${ROOT}/Media/Movies:/movies'
             - '/etc/localtime:/etc/localtime:ro'
         labels:
             - 'traefik.enable=true'
@@ -199,7 +195,7 @@ services:
             - PGID=${PGID}
         volumes:
             - './jackett:/config'
-            - '/media/Media/Torrents/Completed:/downloads'
+            - '${ROOT}/Torrents/Completed:/downloads'
             - '/etc/localtime:/etc/localtime:ro'
         labels:
             - 'traefik.enable=true'
@@ -416,7 +412,7 @@ services:
             - PGID=${PGID}
         volumes:
             - './duplicati:/config'
-            - '/media/Media/Media:/media'
+            - '${ROOT}/Media:/media'
             - '/etc/localtime:/etc/localtime:ro'
         labels:
             - 'traefik.enable=true'
